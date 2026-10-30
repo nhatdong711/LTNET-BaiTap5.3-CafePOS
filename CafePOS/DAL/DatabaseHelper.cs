@@ -12,7 +12,7 @@ namespace CafePOS.DAL
     public static class DatabaseHelper
     {
         private const string DEFAULT_CONN =
-            @"Data Source=.;Initial Catalog=CafePOSDB;Integrated Security=True;TrustServerCertificate=True";
+            @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CafePOSDB;Integrated Security=True;TrustServerCertificate=True";
 
         public static string ConnectionString
         {
