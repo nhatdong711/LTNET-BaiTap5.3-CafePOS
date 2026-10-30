@@ -26,7 +26,7 @@ namespace CafePOS.GUI
         public FrmQuanLyThucDon()
         {
             Text = "Quản lý thực đơn";
-            Size = new Size(950, 560);
+            Size = new Size(1150, 620);
             StartPosition = FormStartPosition.CenterParent;
             Font = new Font("Segoe UI", 10F);
 
@@ -71,6 +71,8 @@ namespace CafePOS.GUI
                 TaoNut("Làm mới", () => { txtMaMon.Clear(); txtTenMon.Clear(); txtDonGia.Clear(); txtTenMon.Focus(); }));
 
             SplitContainer split = new SplitContainer { Dock = DockStyle.Fill, SplitterDistance = 560 };
+            split.FixedPanel = FixedPanel.Panel2;
+            split.SizeChanged += (s2, e2) => { int d = split.Width - 400; if (d > 150) split.SplitterDistance = d; };
             split.Panel1.Controls.Add(dgvMon);
             split.Panel1.Controls.Add(pnlTim);
             split.Panel2.Controls.Add(pnlNhap);
@@ -83,6 +85,7 @@ namespace CafePOS.GUI
             dgvMon.DataSource = monBUS.TimKiem(txtTimKiem.Text);
             if (dgvMon.Columns.Contains("MaDanhMuc")) dgvMon.Columns["MaDanhMuc"].Visible = false;
             if (dgvMon.Columns.Contains("DonGia")) dgvMon.Columns["DonGia"].DefaultCellStyle.Format = "N0";
+            DatTieuDe(dgvMon, "MaMon", "Mã món", "TenMon", "Tên món", "TenDanhMuc", "Danh mục", "DonGia", "Đơn giá");
         }
 
         private void ChonMon()
@@ -155,6 +158,8 @@ namespace CafePOS.GUI
                 TaoNut("Làm mới", () => { txtMaDM.Clear(); txtTenDM.Clear(); txtTenDM.Focus(); }));
 
             SplitContainer split = new SplitContainer { Dock = DockStyle.Fill, SplitterDistance = 480 };
+            split.FixedPanel = FixedPanel.Panel2;
+            split.SizeChanged += (s2, e2) => { int d = split.Width - 400; if (d > 150) split.SplitterDistance = d; };
             split.Panel1.Controls.Add(dgvDanhMuc);
             split.Panel2.Controls.Add(pnlNhap);
             tab.Controls.Add(split);
@@ -172,12 +177,19 @@ namespace CafePOS.GUI
         {
             var ds = dmBUS.GetAll();
             dgvDanhMuc.DataSource = ds;
+            DatTieuDe(dgvDanhMuc, "MaDanhMuc", "Mã danh mục", "TenDanhMuc", "Tên danh mục");
             cbDanhMucMon.DataSource = dmBUS.GetAll();
             cbDanhMucMon.DisplayMember = "TenDanhMuc";
             cbDanhMucMon.ValueMember = "MaDanhMuc";
         }
 
         // ======================= HỖ TRỢ GIAO DIỆN =======================
+        private static void DatTieuDe(DataGridView dgv, params string[] cap)
+        {
+            for (int i = 0; i + 1 < cap.Length; i += 2)
+                if (dgv.Columns.Contains(cap[i])) dgv.Columns[cap[i]].HeaderText = cap[i + 1];
+        }
+
         private static TableLayoutPanel TaoKhungNhap()
         {
             TableLayoutPanel p = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 2, Padding = new Padding(10), AutoScroll = true };

@@ -69,7 +69,11 @@ namespace CafePOS.GUI
             // ---- Phải: gọi món ----
             GroupBox gbOrder = new GroupBox { Text = "Hóa đơn", Dock = DockStyle.Fill };
 
-            TableLayoutPanel pnlGoiMon = new TableLayoutPanel { Dock = DockStyle.Top, Height = 150, ColumnCount = 4, Padding = new Padding(4) };
+            TableLayoutPanel pnlGoiMon = new TableLayoutPanel { Dock = DockStyle.Top, Height = 172, ColumnCount = 4, RowCount = 4, Padding = new Padding(4) };
+            pnlGoiMon.RowStyles.Add(new RowStyle(SizeType.Absolute, 34));
+            pnlGoiMon.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
+            pnlGoiMon.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
+            pnlGoiMon.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
             pnlGoiMon.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90));
             pnlGoiMon.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
             pnlGoiMon.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 80));
@@ -99,7 +103,9 @@ namespace CafePOS.GUI
 
             dgvOrder = TaoLuoi();
 
-            TableLayoutPanel pnlThanhToan = new TableLayoutPanel { Dock = DockStyle.Bottom, Height = 95, ColumnCount = 3, Padding = new Padding(4) };
+            TableLayoutPanel pnlThanhToan = new TableLayoutPanel { Dock = DockStyle.Bottom, Height = 104, ColumnCount = 3, RowCount = 2, Padding = new Padding(4) };
+            pnlThanhToan.RowStyles.Add(new RowStyle(SizeType.Absolute, 52));
+            pnlThanhToan.RowStyles.Add(new RowStyle(SizeType.Absolute, 42));
             pnlThanhToan.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
             pnlThanhToan.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25));
             pnlThanhToan.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25));
